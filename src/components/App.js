@@ -67,12 +67,6 @@ const App = () => {
     setScreen("landing");
   };
 
-  const getModeTitle = () => {
-    if (level === "easy") return "Easy Mode";
-    if (level === "normal") return "Normal Mode";
-    return "Hard Mode";
-  };
-
   return (
     <div>
       {/* Do not remove the main div */}
@@ -124,7 +118,7 @@ const App = () => {
         <div className="game_container">
           <h1>GAmE YO</h1>
 
-          <h4>{getModeTitle()}</h4>
+          <h4>{tries}</h4>
 
           <p>Tries: {tries}</p>
 
