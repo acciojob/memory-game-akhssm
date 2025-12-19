@@ -75,6 +75,8 @@ const App = () => {
         <div className="levels_container">
           <h1>Welcome!</h1>
 
+          <h4>Select Level</h4>
+
           <div className="levels">
             <label>
               <input
