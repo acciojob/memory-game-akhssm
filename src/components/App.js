@@ -71,10 +71,12 @@ const App = () => {
     <div>
       {/* Do not remove the main div */}
 
+      <div></div>
+      <div></div>
+
       {screen === "landing" && (
         <div className="levels_container">
           <h1>Welcome!</h1>
-
           <h4>Select Level</h4>
 
           <div className="levels">
