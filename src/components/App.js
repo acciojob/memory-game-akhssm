@@ -23,6 +23,7 @@ const App = () => {
       nums.push(i, i);
     }
 
+    // Shuffle the tiles
     nums.sort(() => Math.random() - 0.5);
 
     setTiles(nums);
@@ -56,12 +57,13 @@ const App = () => {
         setMatched((prev) => [...prev, a, b]);
         setFlipped([]);
       } else {
-        setTimeout(() => setFlipped([]), 700);
+        const timer = setTimeout(() => setFlipped([]), 700);
+        return () => clearTimeout(timer);
       }
     }
   }, [flipped, tiles]);
 
-  const isSolved = matched.length === tiles.length && tiles.length > 0;
+  const isSolved = tiles.length > 0 && matched.length === tiles.length;
 
   const newGame = () => {
     setScreen("landing");
@@ -70,9 +72,6 @@ const App = () => {
   return (
     <div>
       {/* Do not remove the main div */}
-
-      <div></div>
-      <div></div>
 
       {screen === "landing" && (
         <div className="levels_container">
@@ -120,10 +119,6 @@ const App = () => {
 
       {screen === "game" && (
         <div className="game_container">
-          <h1>GAmE YO</h1>
-
-          <h4>{tries}</h4>
-
           <p>Tries: {tries}</p>
 
           {isSolved && <p className="status">ALL SOLVED!</p>}
@@ -131,7 +126,11 @@ const App = () => {
 
           <div
             className="cells_container"
-            style={{ gridTemplateColumns: "repeat(4, 120px)" }}
+            style={{ 
+              display: "grid", 
+              gridTemplateColumns: "repeat(4, 120px)",
+              gap: "10px" 
+            }}
           >
             {tiles.map((num, index) => (
               <div
@@ -141,9 +140,9 @@ const App = () => {
                 }`}
                 onClick={() => flipTile(index)}
               >
-                {flipped.includes(index) || matched.includes(index)
-                  ? num
-                  : ""}
+                {(flipped.includes(index) || matched.includes(index)) && (
+                  <span>{num}</span>
+                )}
               </div>
             ))}
           </div>
