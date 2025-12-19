@@ -18,14 +18,10 @@ const App = () => {
   const startGame = () => {
     const pairs = LEVELS[level];
     let nums = [];
-
     for (let i = 0; i < pairs; i++) {
       nums.push(i, i);
     }
-
-    // Shuffle the tiles
     nums.sort(() => Math.random() - 0.5);
-
     setTiles(nums);
     setFlipped([]);
     setMatched([]);
@@ -34,11 +30,7 @@ const App = () => {
   };
 
   const flipTile = (index) => {
-    if (
-      flipped.length === 2 ||
-      flipped.includes(index) ||
-      matched.includes(index)
-    )
+    if (flipped.length === 2 || flipped.includes(index) || matched.includes(index))
       return;
 
     const newFlipped = [...flipped, index];
@@ -52,7 +44,6 @@ const App = () => {
   useEffect(() => {
     if (flipped.length === 2) {
       const [a, b] = flipped;
-
       if (tiles[a] === tiles[b]) {
         setMatched((prev) => [...prev, a, b]);
         setFlipped([]);
@@ -75,7 +66,6 @@ const App = () => {
         <div className="levels_container">
           <h1>Welcome!</h1>
           <h4>Select Level</h4>
-
           <div className="levels">
             {Object.keys(LEVELS).map((lvl) => (
               <label key={lvl}>
@@ -90,40 +80,45 @@ const App = () => {
               </label>
             ))}
           </div>
-
           <button onClick={startGame}>Start</button>
         </div>
       )}
 
       {screen === "game" && (
         <div className="game_container">
+          <h1>Memory Game</h1>
+
           <h4>Tries: {tries}</h4>
 
-          {isSolved && <p className="status">ALL SOLVED!</p>}
-          {isSolved && <button onClick={newGame}>New Game</button>}
-
-          <div
-            className="cells_container"
-            style={{ 
-              display: "grid", 
-              gridTemplateColumns: "repeat(4, 120px)",
-              gap: "10px" 
-            }}
-          >
-            {tiles.map((num, index) => (
-              <div
-                key={index}
-                className={`cell ${
-                  matched.includes(index) ? "matched" : ""
-                }`}
-                onClick={() => flipTile(index)}
-              >
-                {(flipped.includes(index) || matched.includes(index)) && (
-                  <span>{num}</span>
-                )}
-              </div>
-            ))}
+          <div>
+             <div
+              className="cells_container"
+              style={{ 
+                display: "grid", 
+                gridTemplateColumns: "repeat(4, 120px)",
+                gap: "10px" 
+              }}
+            >
+              {tiles.map((num, index) => (
+                <div
+                  key={index}
+                  className={`cell ${matched.includes(index) ? "matched" : ""}`}
+                  onClick={() => flipTile(index)}
+                >
+                  {(flipped.includes(index) || matched.includes(index)) && (
+                    <span>{num}</span>
+                  )}
+                </div>
+              ))}
+            </div>
           </div>
+
+          {isSolved && (
+            <>
+              <p className="status">ALL SOLVED!</p>
+              <button onClick={newGame}>New Game</button>
+            </>
+          )}
         </div>
       )}
     </div>
