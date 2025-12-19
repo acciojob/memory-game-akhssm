@@ -1,1 +1,60 @@
+* {
+  box-sizing: border-box;
+  font-family: Georgia, serif;
+}
 
+body {
+  margin: 0;
+  background: black;
+}
+
+/* LANDING */
+.levels_container {
+  background: linear-gradient(blue, #0000ff);
+  height: 200px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.levels label {
+  font-size: 22px;
+  margin: 0 10px;
+}
+
+button {
+  font-size: 20px;
+  padding: 5px 15px;
+  cursor: pointer;
+}
+
+/* GAME */
+.game_container {
+  background: linear-gradient(blue, #0000ff);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.cells_container {
+  display: grid;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.cell {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(orange, #ffb347);
+  font-size: 24px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.cell.matched {
+  opacity: 0.9;
+  cursor: default;
+}
+
+.status {
+  font-size: 22px;
+  margin-top: 10px;
+}
