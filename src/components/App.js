@@ -70,47 +70,25 @@ const App = () => {
   };
 
   return (
-    <div>
-      {/* Do not remove the main div */}
-
+    <div id="main">
       {screen === "landing" && (
         <div className="levels_container">
           <h1>Welcome!</h1>
           <h4>Select Level</h4>
 
           <div className="levels">
-            <label>
-              <input
-                type="radio"
-                name="level"
-                id="easy"
-                checked={level === "easy"}
-                onChange={() => setLevel("easy")}
-              />
-              Easy
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="level"
-                id="normal"
-                checked={level === "normal"}
-                onChange={() => setLevel("normal")}
-              />
-              Normal
-            </label>
-
-            <label>
-              <input
-                type="radio"
-                name="level"
-                id="hard"
-                checked={level === "hard"}
-                onChange={() => setLevel("hard")}
-              />
-              Hard
-            </label>
+            {Object.keys(LEVELS).map((lvl) => (
+              <label key={lvl}>
+                <input
+                  type="radio"
+                  name="level"
+                  id={lvl}
+                  checked={level === lvl}
+                  onChange={() => setLevel(lvl)}
+                />
+                {lvl.charAt(0).toUpperCase() + lvl.slice(1)}
+              </label>
+            ))}
           </div>
 
           <button onClick={startGame}>Start</button>
@@ -119,7 +97,7 @@ const App = () => {
 
       {screen === "game" && (
         <div className="game_container">
-          <p>Tries: {tries}</p>
+          <h4>Tries: {tries}</h4>
 
           {isSolved && <p className="status">ALL SOLVED!</p>}
           {isSolved && <button onClick={newGame}>New Game</button>}
